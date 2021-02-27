@@ -1,17 +1,33 @@
-<section ng-controller="homeController as vm" ng-init="vm.init()" >
-  <div>
+<section ng-controller="homeController as vm" ng-init="vm.init()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-4 text-center">
+        <div class="alinhamento">
+          <img src="/imagens/pagamentoOnline.jpg">
 
-    <div class="col-12" style="  color: rgb(0, 0, 0);"> 
-      <h1 style="margin-left: 615px;">Bem vindo ao banco GJVC!!!</h1>
+          <div class="row align-items-center">
+            <div class="col-6">
+              <button class="btn btn-lg btn-success" type="button">
+                Cadastrar Transação
+              </button>
+            </div>
+            <div class="col-6 ">
+              <button type="button" ng-click="vm.validarDetalhe();" class="btn-lg btn btn-outline-success">Detalhes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8 d-none d-sm-block" ng-if="vm.validaDetalhe">
+        <img src="/imagens/bonecas.png" width="95%">
+      </div>
+      <div class="col-8 d-none d-sm-block text-right" ng-if="!vm.validaDetalhe">
+        <div class="col-10 text-right">
+          <h3><strong >Parceiros</strong></h3>
+        </div>
+        
+        <img src="/imagens/pix.png" >
+        <img src="/imagens/alelo.png" width="22.5%">
+      </div>
     </div>
-    
-    <div class="navbar-brand" >
-      <a class="navbar-item">
-          <img src="/imagens/pagamentoOnline.jpg" class="" alt="...">
-      </a>
-    </div>
-  
-  
   </div>
-
 </section>

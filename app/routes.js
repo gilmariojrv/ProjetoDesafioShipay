@@ -14,7 +14,7 @@
                 templateUrl: 'home/home.tpl.html'
             })
             .when('/teste', {
-                templateUrl: 'home/home-copy.tpl.html'
+                templateUrl: 'listagem/listagem.tpl.html'
             })
             .otherwise({
                 redirectTo: '/'

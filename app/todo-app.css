@@ -11,10 +11,6 @@
     padding: 10px;
 }
 
-.col-xs-5 {
-    width: 41.66666667%;
-  }
-
 .texto-small {
     font-size: small;
 }
@@ -37,10 +33,10 @@ td {
          -o-transition: all .2s ease-in-out;
             transition: all .2s ease-in-out;
   }
-.navBarGj{
-    background-color: #d2a71900;
-    width: 1903px;
-    margin-left: -397px;
+
+.black {
+  color: black;
+  margin-top: 40px;
 }
 
 .h55{
@@ -53,43 +49,24 @@ td {
     border: 0px; width: 150px; height: 40px; color: white; background: #fa952b;
 }
 
-.centro {
-    margin-left: -495px;
-    height: 800px;
-    width: 1900px;
-    background-color: #eb050500;
-    margin-top: -800px;
-  }
-
-  .centralizar {
-    margin-top: -700px;
-    margin-left: -390px;
-    height: 700px;
-    width: 169%;
-    background-color: black;
-  }
-
-  .login {
-      background-color: rgb(255, 255, 255);
-      width: 300px;
-      height: 600px;
-      margin-left: 815px;
-      position: relative;
-  }
-
-  .center{
+.login {
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 600px;
     margin-left: 815px;
-  }
-
-  .titulo {
-    width: 1830px;
-    background-color: #ffffff;
     position: relative;
-    
-  }
+}
 
-  .input[type="text"]{
-    padding: 0.2em;
-    border: 1px;
+@media only screen and (min-width: 576px) {
+  .alinhamento {
+    margin-left: 100px;
 
   }
+}
+
+
+.input[type="text"]{
+  padding: 0.2em;
+  border: 1px;
+
+}

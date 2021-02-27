@@ -1,0 +1,63 @@
+<section ng-controller="listagemController as vm" ng-init="vm.init()">
+  <div class="container">
+    <div class="row justify-content-center text-white" > 
+      <div class="col-6" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
+        <h3 class="text-center black" >LOGIN</h3>
+        <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
+          {{vm.error}}
+         </div>
+        <form ng-submit="vm.verificarCadastro();">
+          <div class="form-group black">
+            <label for="exampleInputCnpj">CNPJ</label>
+            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required placeholder="Digite sua senha">
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" >Confirmar</button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="col-10"  style="background-color: #f0f0f0a6;" ng-if="!vm.habilitarLogin">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="color: black;">Empresa</th>
+              <th style="color: black;">Cliente</th>
+              <th style="color: black;">Valor</th>
+              <th style="color: black;">Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat = "usuario in vm.estabelecimento.listaTransferencias">
+              <td style="color: black;">{{usuario.cnpj}}</td>
+              <td style="color: black;">{{usuario.cpf}}</td>
+              <td style="color: black;">{{usuario.valor}}</td>
+              <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i class="bi bi-info-circle"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal" id="modalDescricao" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title black">Descrição da Transação</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body black">
+              <p>{{vm.descricao}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
