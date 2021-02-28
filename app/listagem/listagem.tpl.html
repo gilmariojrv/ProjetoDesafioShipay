@@ -64,13 +64,16 @@
         <form ng-submit="vm.pesquisarPorCpf();">
           <div class="row no-gutters" style="margin-top: 20px;">
             <div class="col-8">
-                <input type="text" class="form-control" ng-model="vm.cpfPesquisa" id="exampleInputPassword1">
+                <input type="text" class="form-control" mask="999.999.999-99" ng-model="vm.cpfPesquisa" id="exampleInputPassword1">
             </div>
             <div class="col-4">
                 <div class="">
                   <button type="submit" class="btn btn-primary">Pesquisar por CPF</button>
                 </div>
             </div>
+          </div>
+          <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
+            {{vm.error}}
           </div>
       </form>
       <hr>

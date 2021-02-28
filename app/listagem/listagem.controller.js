@@ -47,7 +47,10 @@
     }
 
     function pesquisarPorCpf(){
-      vm.estabelecimento = serviceGlobal.getEstabelecimento(vm.cpfPesquisa);
+      vm.error = serviceGlobal.verificarCpf(vm.cpfPesquisa);
+      if(!vm.error){
+        vm.estabelecimento = serviceGlobal.getEstabelecimento(vm.cpfPesquisa);
+      }
     }
 
     function abrirLogin() {

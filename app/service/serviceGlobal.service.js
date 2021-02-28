@@ -65,6 +65,8 @@
     function verificarCpf(cpf) {
       if (cpf.length < 14) {
         var erro = "CPF inválido";
+      }else if (!vm.listaRequisicoes[vm.indexLogin].listaTransferencias.find(element => element.cpf === cpf)) {
+          erro = "CPF inválido";
       }
       return erro;
     }
