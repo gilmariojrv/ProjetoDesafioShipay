@@ -6,7 +6,7 @@
 
   serviceGlobal.$inject = [];
 
-  function serviceGlobal( ) {
+  function serviceGlobal() {
     var vm = this;
 
     vm.inserirNovo = inserirNovo;
@@ -15,49 +15,111 @@
     vm.inserirTransferencia = inserirTransferencia;
     vm.getEstabelecimento = getEstabelecimento;
     vm.getLogin = getLogin;
-    
+    vm.verificarCpf = verificarCpf;
+    vm.verificarCamposLogin = verificarCamposLogin;
+    vm.verificarCnpjCadastro = verificarCnpjCadastro;
+    vm.verificarDuplicidade = verificarDuplicidade;
+    vm.logout = logout;
+
 
     vm.loginSalvo = null;
     vm.indexLogin = 0;
 
 
     vm.listaRequisicoes = [{
-      "cnpj": "45283163000167",
-      "senha": "1234",
+      "cnpj": "12",
+      "senha": "123",
       "listaTransferencias": [{
-        "cnpj": "45283163000167",
+        "cnpj": "12",
         "cpf": "094.214.930-01",
         "valor": 590.01,
         "descricao": "Almoço em restaurante chique pago via Shipay!",
       }]
-   }];
+    }];
 
-   function inserirNovo(obj){
-    vm.listaRequisicoes.push(obj);
-   }
- 
-   function getLista(){
-     return vm.listaRequisicoes;
-   }
+    function verificarCpf(cpf) {
+      if (cpf.length < 14) {
+        var erro = "CPF inválido";
+      }
+      return erro;
+    }
 
-   function getEstabelecimento(){
-     return vm.listaRequisicoes[vm.indexLogin];
-   }
+    function verificarCnpjCadastro(cnpj) {
+      if (cnpj.length < 19) {
+        var erro = "Digite um CNPJ válido";
+      }
+      return erro;
+    }
 
-   function salvarLogin(cnpj){
-    vm.loginSalvo = cnpj;
-    vm.indexLogin = vm.listaRequisicoes.findIndex(element => element.cnpj === cnpj)
-   }
+    function inserirNovo(obj) {
+     
+      if(obj){ 
+        vm.listaRequisicoes.push(obj);
+      }
+     
+      var sucesso = "Usuário cadastrado com sucesso, faça login para ter acesso.";
+      return sucesso;
+    }
 
-   function getLogin (){
-     return vm.loginSalvo;
-   }
+    function getLista() {
+      return vm.listaRequisicoes;
+    }
 
-   function inserirTransferencia(trans){
-    vm.listaRequisicoes[vm.indexLogin].listaTransferencias.push(trans);
+    function getEstabelecimento() {
+      return vm.listaRequisicoes[vm.indexLogin];
+    }
 
-   }
+    function salvarLogin(cnpj) {
+      vm.loginSalvo = cnpj;
+      vm.indexLogin = vm.listaRequisicoes.findIndex(element => element.cnpj === cnpj)
+    }
 
+    function getLogin() {
+      return vm.loginSalvo;
+    }
+
+    function verificarDuplicidade(listaCadastros, cnpj){
+      var error = null;
+
+      if (listaCadastros.some(element => element.cnpj === cnpj)) {
+          error = "CNPJ já cadastrado !!";
+      } else {
+        error = null;
+      }
+      return error;
+    }
+
+    function verificarCamposLogin(listaCadastros, cnpj, senha){
+      
+      var error = null;
+
+      if (!listaCadastros.some(element => element.cnpj === cnpj)) {
+          error = "CNPJ inválido !!";
+      } else if (!(listaCadastros.find(element => element.cnpj === cnpj).senha === senha)) {
+          error = "Senha inválida !!";
+      } else {
+        error = null;
+      }
+      return error;
+    }
+
+    function inserirTransferencia(trans) {
+      if(trans){ 
+        if(vm.listaRequisicoes[vm.indexLogin].listaTransferencias === undefined){
+          vm.listaRequisicoes[vm.indexLogin].listaTransferencias = [];
+        }
+        vm.listaRequisicoes[vm.indexLogin].listaTransferencias.push(trans);
+      }
+     
+      var sucesso = "Transação incluída com sucesso.";
+      return sucesso;
+    }
+
+  }
+
+  function logout() {
+    vm.loginSalvo = null;
+    vm.indexLogin = null;
   }
 
 

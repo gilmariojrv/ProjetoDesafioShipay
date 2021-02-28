@@ -29,49 +29,60 @@
     function init() {
       vm.listaCadastros = serviceGlobal.getLista();
       vm.cnpj = serviceGlobal.getLogin();
-      if(vm.cnpj){
+      if (vm.cnpj) {
         vm.habilitarLogin = false;
         vm.estabelecimento = serviceGlobal.getEstabelecimento();
       }
-      
+
     }
 
     function verificarCadastro() {
-      if (!vm.listaCadastros.some(element => element.cnpj === vm.cnpj)) {
-        vm.error = "CNPJ inválido !!";
-      } else if (!(vm.listaCadastros.find(element => element.cnpj === vm.cnpj).senha === vm.senha)) {
-        vm.error = "Senha inválida !!";
-      }else{
-        vm.error = null;
+      vm.error = serviceGlobal.verificarCamposLogin(vm.listaCadastros, vm.cnpj, vm.senha);
+      if (!vm.error) {
         vm.habilitarLogin = false;
         serviceGlobal.salvarLogin(vm.cnpj);
         vm.estabelecimento = serviceGlobal.getEstabelecimento();
       }
     }
 
-    function abrirLogin(){
+    function abrirLogin() {
+      vm.error = null;
       vm.loginCadastro = false;
       vm.cnpj = null;
       vm.senha = null;
     }
 
-    function abrirCadastro(){
+    function abrirCadastro() {
+      vm.error = null;
       vm.loginCadastro = true;
       vm.cnpj = null;
       vm.senha = null;
     }
 
-    function cadastrarUsuario(){
-      var entrada = {
-        "cnpj":vm.cnpj,
-        "senha":vm.senha
+    function cadastrarUsuario() {
+      vm.error = null;
+      vm.sucesso = null;
+      vm.error = serviceGlobal.verificarCnpjCadastro(vm.cnpj);
+
+      if (!vm.error) {
+        vm.error = serviceGlobal.verificarDuplicidade(vm.listaCadastros, vm.cnpj);
+        if (!vm.error) {
+          var entrada = {
+            "cnpj": vm.cnpj,
+            "senha": vm.senha
+          }
+          serviceGlobal.inserirNovo(entrada);
+          vm.sucesso = serviceGlobal.inserirNovo();
+          vm.cnpj = null;
+          vm.senha = null;
+        }
+
       }
-      serviceGlobal.inserirNovo(entrada);
-      vm.teste = serviceGlobal.getLista();
-      console.log(vm.teste);
+
+
     }
 
-    function abrirModalDescricao(usuario){
+    function abrirModalDescricao(usuario) {
       $('#modalDescricao').modal('show');
       vm.descricao = usuario.descricao;
     }

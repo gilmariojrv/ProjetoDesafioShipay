@@ -1,77 +1,103 @@
 <section ng-controller="cadastroTransacaoController as vm" ng-init="vm.init()">
   <div class="container">
-    <div class="row justify-content-center text-white" > 
-      <div class="col-6" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
-        <a style="cursor: pointer;" ng-click="vm.abrirLogin;" ><h3 class="text-center black">LOGIN</h3></a>
-        <a style="cursor: pointer;" ng-click="vm.abrirLogin;" ><h3 class="text black">Cadastrar usuario</h3></a>
-        <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
-          {{vm.error}}
-         </div>
-        <form ng-submit="vm.verificarCadastro();" ng-if="vm.habilitarLogin">
-          <div class="form-group black">
-            <label for="exampleInputCnpj">CNPJ</label>
-            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
+    <div class="row justify-content-center text-white">
+      <div class="col-8" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
+        <div class="row text-center">
+          <div class="col-6">
+            <a style="cursor: pointer;" ng-click="vm.abrirLogin();">
+              <h3 class=" black">LOGIN</h3>
+            </a>
           </div>
-          <div class="form-group black">
-            <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required placeholder="Digite sua senha">
-          </div>
-          <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" >Confirmar</button>
-          </div>
-        </form>
-        <form ng-submit="vm.verificarCadastro();" ng-if="!vm.habilitarLogin">
-          <div class="form-group black">
-            <label for="exampleInputCnpj">CNPJ</label>
-            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
-          </div>
-          <div class="form-group black">
-            <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required placeholder="Digite sua senha">
-          </div>
-          <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" >Confirmar</button>
-          </div>
-        </form>
-      </div>
-      
-      <div class="col-10"  style="background-color: #f0f0f0a6;" ng-if="!vm.habilitarLogin">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th style="color: black;">Empresa</th>
-              <th style="color: black;">Cliente</th>
-              <th style="color: black;">Valor</th>
-              <th style="color: black;">Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat = "usuario in vm.estabelecimento.listaTransferencias">
-              <td style="color: black;">{{usuario.cnpj}}</td>
-              <td style="color: black;">{{usuario.cpf}}</td>
-              <td style="color: black;">{{usuario.valor}}</td>
-              <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i class="bi bi-info-circle"></i></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="modal" id="modalDescricao" tabindex="-1" role="dialog" >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title black">Descrição da Transação</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body black">
-              <p>{{vm.descricao}}</p>
-            </div>
+          <div class="col-4">
+            <a style="cursor: pointer;" ng-click="vm.abrirCadastro();">
+              <h3 class=" black">Cadastrar usuario</h3>
+            </a>
           </div>
         </div>
+
+
+        <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
+          {{vm.error}}
+        </div>
+        <div class="alert alert-info  text-center" ng-if="vm.sucesso" role="alert">
+          {{vm.sucesso}}
+        </div>
+        <form ng-submit="vm.verificarLogin();" ng-if="vm.habilitarLogin">
+          <div ng-if="!vm.loginCadastro">
+            <div class="form-group black">
+            <label for="exampleInputCnpj">CNPJ</label>
+            <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
+              placeholder="Digite seu CNPJ">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
+              placeholder="Digite sua senha">
+          </div>
+          
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
+          </div>
+        </form>
+        <form ng-submit="vm.cadastrarUsuario();" ng-if="vm.habilitarLogin && vm.loginCadastro">
+          <div ng-if="vm.loginCadastro">
+            <div class="form-group black">
+              <label for="exampleInputCnpj">Cadastre o seu CNPJ</label>
+              <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
+                placeholder="Digite seu CNPJ">
+            </div>
+            <div class="form-group black">
+              <label for="exampleInputPassword1">Cadastre sua senha</label>
+              <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
+                placeholder="Digite sua senha">
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+          </div>
+        </form>
       </div>
-      
+
+      <div class="col-10" style="background-color: #63c9aa69;" ng-if="!vm.habilitarLogin">
+        <div class="row text-center">
+          <div class="col-12">
+              <h3 class=" black">TRANSAÇÃO</h3>
+              <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
+                {{vm.error}}
+              </div>
+              <div class="alert alert-info  text-center" ng-if="vm.sucesso" role="alert">
+                {{vm.sucesso}}
+              </div>
+          </div>
+        </div>
+        <form ng-submit="vm.cadastrar();">
+          <div class="form-group black">
+            <label for="exampleInputCnpj">CNPJ(estabelecimento)</label>
+            <input type="text" class="form-control"  mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" disabled
+              placeholder="Digite seu CNPJ">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">CPF(Cliente)</label>
+            <input type="text" class="form-control" mask="999.999.999-99" ng-model="vm.cpf" id="exampleInputPassword1" required
+              placeholder="Digite o cpf do cliente">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">Valor(BRL)</label>
+            <input type="text" class="form-control"  mask="999.999.999.99" ng-model="vm.valor" id="exampleInputPassword1" required
+              placeholder="Digite o valor da transação">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">Descrição</label>
+              <textarea class="form-control"  placeholder="Digite a descrição da transação" ng-model="vm.descricao" id="exampleFormControlTextarea1" rows="3" required></textarea>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
+        </form>
+      </div>
+
+
     </div>
   </div>
 </section>

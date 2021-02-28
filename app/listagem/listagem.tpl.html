@@ -11,7 +11,7 @@
           <div class="col-4">
 
             <a style="cursor: pointer;" ng-click="vm.abrirCadastro();">
-              <h3 class=" black">Cadastrar usuario</h3>
+              <h3 class=" black">Cadastrar usuário</h3>
             </a>
           </div>
         </div>
@@ -20,11 +20,14 @@
         <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
           {{vm.error}}
         </div>
+        <div class="alert alert-info  text-center" ng-if="vm.sucesso" role="alert">
+          {{vm.sucesso}}
+        </div>
         <form ng-submit="vm.verificarCadastro();" ng-if="vm.habilitarLogin">
           <div ng-if="!vm.loginCadastro">
             <div class="form-group black">
             <label for="exampleInputCnpj">CNPJ</label>
-            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required
+            <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
               placeholder="Digite seu CNPJ">
           </div>
           <div class="form-group black">
@@ -42,7 +45,7 @@
           <div ng-if="vm.loginCadastro">
             <div class="form-group black">
               <label for="exampleInputCnpj">Cadastre o seu CNPJ</label>
-              <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required
+              <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
                 placeholder="Digite seu CNPJ">
             </div>
             <div class="form-group black">
@@ -74,6 +77,9 @@
               <td style="color: black;">{{usuario.valor}}</td>
               <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i
                     class="bi bi-info-circle"></i></a></td>
+            </tr>
+            <tr ng-if="vm.estabelecimento.listaTransferencias.length === undefined" style="color: black;">
+              <td>NENHUMA TRANSAÇÃO CADASTRADA</td>
             </tr>
           </tbody>
         </table>

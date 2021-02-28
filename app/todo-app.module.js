@@ -2,7 +2,7 @@
     "use strict";
 
     // MODULO
-    angular.module('todoApp', ['ngRoute']);
+    angular.module('todoApp', ['ngRoute', 'ngMask']);
 
 
 })();
