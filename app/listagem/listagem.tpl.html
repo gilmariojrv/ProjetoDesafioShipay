@@ -26,27 +26,27 @@
         <form ng-submit="vm.verificarCadastro();" ng-if="vm.habilitarLogin">
           <div ng-if="!vm.loginCadastro">
             <div class="form-group black">
-            <label for="exampleInputCnpj">CNPJ</label>
-            <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
-              placeholder="Digite seu CNPJ">
-          </div>
-          <div class="form-group black">
-            <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
-              placeholder="Digite sua senha">
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">Confirmar</button>
-          </div>
+              <label for="exampleInputCnpj">CNPJ</label>
+              <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj"
+                id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
+            </div>
+            <div class="form-group black">
+              <label for="exampleInputPassword1">Senha</label>
+              <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
+                placeholder="Digite sua senha">
+            </div>
+
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
           </div>
         </form>
         <form ng-submit="vm.cadastrarUsuario();" ng-if="vm.habilitarLogin && vm.loginCadastro">
           <div ng-if="vm.loginCadastro">
             <div class="form-group black">
               <label for="exampleInputCnpj">Cadastre o seu CNPJ</label>
-              <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj" id="exampleInputCnpj" required
-                placeholder="Digite seu CNPJ">
+              <input type="text" class="form-control" mask="99.999.999./9999-99" ng-model="vm.cnpj"
+                id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
             </div>
             <div class="form-group black">
               <label for="exampleInputPassword1">Cadastre sua senha</label>
@@ -59,23 +59,36 @@
           </div>
         </form>
       </div>
-
+      
       <div class="col-10" style="background-color: #f0f0f0a6;" ng-if="!vm.habilitarLogin">
-        <table class="table table-striped">
+        <form ng-submit="vm.pesquisarPorCpf();">
+          <div class="row no-gutters" style="margin-top: 20px;">
+            <div class="col-8">
+                <input type="text" class="form-control" ng-model="vm.cpfPesquisa" id="exampleInputPassword1">
+            </div>
+            <div class="col-4">
+                <div class="">
+                  <button type="submit" class="btn btn-primary">Pesquisar por CPF</button>
+                </div>
+            </div>
+          </div>
+      </form>
+      <hr>
+        <table style="color: black;" class="table table-striped">
           <thead>
             <tr>
-              <th style="color: black;">Empresa</th>
-              <th style="color: black;">Cliente</th>
-              <th style="color: black;">Valor</th>
-              <th style="color: black;">Descrição</th>
+              <th>Empresa</th>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th>Descrição</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="usuario in vm.estabelecimento.listaTransferencias">
-              <td style="color: black;">{{usuario.cnpj}}</td>
-              <td style="color: black;">{{usuario.cpf}}</td>
-              <td style="color: black;">{{usuario.valor}}</td>
-              <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i
+              <td>{{usuario.cnpj}}</td>
+              <td>{{usuario.cpf}}</td>
+              <td>{{usuario.valor}}</td>
+              <td><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i
                     class="bi bi-info-circle"></i></a></td>
             </tr>
             <tr ng-if="vm.estabelecimento.listaTransferencias.length === undefined" style="color: black;">

@@ -23,6 +23,7 @@
     vm.abrirLogin = abrirLogin;
     vm.abrirCadastro = abrirCadastro;
     vm.cadastrarUsuario = cadastrarUsuario;
+    vm.pesquisarPorCpf = pesquisarPorCpf;
 
     /* ***************    FUNÇÕES    ******************************** */
 
@@ -43,6 +44,10 @@
         serviceGlobal.salvarLogin(vm.cnpj);
         vm.estabelecimento = serviceGlobal.getEstabelecimento();
       }
+    }
+
+    function pesquisarPorCpf(){
+      vm.estabelecimento = serviceGlobal.getEstabelecimento(vm.cpfPesquisa);
     }
 
     function abrirLogin() {
