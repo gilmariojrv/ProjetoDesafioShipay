@@ -20,6 +20,7 @@
     vm.verificarCnpjCadastro = verificarCnpjCadastro;
     vm.verificarDuplicidade = verificarDuplicidade;
     vm.logout = logout;
+    vm.verificarCpfPesquisa = verificarCpfPesquisa;
 
 
     vm.loginSalvo = null;
@@ -68,6 +69,18 @@
       }else if (!vm.listaRequisicoes[vm.indexLogin].listaTransferencias.find(element => element.cpf === cpf)) {
           erro = "CPF inválido";
       }
+      return erro;
+    }
+
+    function verificarCpfPesquisa(cpf) {
+      if(cpf.length > 0){
+         if (cpf.length < 14) {
+          var erro = "CPF inválido";
+        }else if (!vm.listaRequisicoes[vm.indexLogin].listaTransferencias.find(element => element.cpf === cpf)) {
+            erro = "CPF inválido";
+        }
+      }
+     
       return erro;
     }
 
