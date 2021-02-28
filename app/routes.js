@@ -16,6 +16,9 @@
             .when('/teste', {
                 templateUrl: 'listagem/listagem.tpl.html'
             })
+            .when('/cadastroTransacao', {
+                templateUrl: 'cadastro-transacao/cadastro-transacao.tpl.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });

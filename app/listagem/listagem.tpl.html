@@ -1,27 +1,63 @@
 <section ng-controller="listagemController as vm" ng-init="vm.init()">
   <div class="container">
-    <div class="row justify-content-center text-white" > 
-      <div class="col-6" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
-        <h3 class="text-center black" >LOGIN</h3>
+    <div class="row justify-content-center text-white">
+      <div class="col-8" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
+        <div class="row text-center">
+          <div class="col-6">
+            <a style="cursor: pointer;" ng-click="vm.abrirLogin();">
+              <h3 class=" black">LOGIN</h3>
+            </a>
+          </div>
+          <div class="col-4">
+
+            <a style="cursor: pointer;" ng-click="vm.abrirCadastro();">
+              <h3 class=" black">Cadastrar usuario</h3>
+            </a>
+          </div>
+        </div>
+
+
         <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
           {{vm.error}}
-         </div>
-        <form ng-submit="vm.verificarCadastro();">
-          <div class="form-group black">
+        </div>
+        <form ng-submit="vm.verificarCadastro();" ng-if="vm.habilitarLogin">
+          <div ng-if="!vm.loginCadastro">
+            <div class="form-group black">
             <label for="exampleInputCnpj">CNPJ</label>
-            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
+            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required
+              placeholder="Digite seu CNPJ">
           </div>
           <div class="form-group black">
             <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required placeholder="Digite sua senha">
+            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
+              placeholder="Digite sua senha">
           </div>
+          
           <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary" >Confirmar</button>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
+          </div>
+        </form>
+        <form ng-submit="vm.cadastrarUsuario();" ng-if="vm.habilitarLogin && vm.loginCadastro">
+          <div ng-if="vm.loginCadastro">
+            <div class="form-group black">
+              <label for="exampleInputCnpj">Cadastre o seu CNPJ</label>
+              <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required
+                placeholder="Digite seu CNPJ">
+            </div>
+            <div class="form-group black">
+              <label for="exampleInputPassword1">Cadastre sua senha</label>
+              <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required
+                placeholder="Digite sua senha">
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
           </div>
         </form>
       </div>
-      
-      <div class="col-10"  style="background-color: #f0f0f0a6;" ng-if="!vm.habilitarLogin">
+
+      <div class="col-10" style="background-color: #f0f0f0a6;" ng-if="!vm.habilitarLogin">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -32,17 +68,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat = "usuario in vm.estabelecimento.listaTransferencias">
+            <tr ng-repeat="usuario in vm.estabelecimento.listaTransferencias">
               <td style="color: black;">{{usuario.cnpj}}</td>
               <td style="color: black;">{{usuario.cpf}}</td>
               <td style="color: black;">{{usuario.valor}}</td>
-              <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i class="bi bi-info-circle"></i></a></td>
+              <td style="color: black;"><a style="cursor: pointer;" ng-click="vm.abrirModalDescricao(usuario);"><i
+                    class="bi bi-info-circle"></i></a></td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="modal" id="modalDescricao" tabindex="-1" role="dialog" >
+      <div class="modal" id="modalDescricao" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -57,7 +94,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>

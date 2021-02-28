@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('todoApp')
-    .controller('listagemController', listagemController);
+    .controller('cadastroTransacaoController', cadastroTransacaoController);
 
-  listagemController.$inject = ['serviceGlobal'];
+    cadastroTransacaoController.$inject = ['serviceGlobal'];
 
-  function listagemController(serviceGlobal) {
+  function cadastroTransacaoController(serviceGlobal) {
     var vm = this;
 
     /* ***************    INIT VARIÁVEIS    *********************************** */

@@ -1,12 +1,26 @@
-<section ng-controller="listagemController as vm" ng-init="vm.init()">
+<section ng-controller="cadastroTransacaoController as vm" ng-init="vm.init()">
   <div class="container">
     <div class="row justify-content-center text-white" > 
       <div class="col-6" ng-if="vm.habilitarLogin" style=" background-color: #63c9aa69;">
-        <h3 class="text-center black" >LOGIN</h3>
+        <a style="cursor: pointer;" ng-click="vm.abrirLogin;" ><h3 class="text-center black">LOGIN</h3></a>
+        <a style="cursor: pointer;" ng-click="vm.abrirLogin;" ><h3 class="text black">Cadastrar usuario</h3></a>
         <div class="alert alert-danger text-center" ng-if="vm.error" role="alert">
           {{vm.error}}
          </div>
-        <form ng-submit="vm.verificarCadastro();">
+        <form ng-submit="vm.verificarCadastro();" ng-if="vm.habilitarLogin">
+          <div class="form-group black">
+            <label for="exampleInputCnpj">CNPJ</label>
+            <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
+          </div>
+          <div class="form-group black">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" ng-model="vm.senha" id="exampleInputPassword1" required placeholder="Digite sua senha">
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" >Confirmar</button>
+          </div>
+        </form>
+        <form ng-submit="vm.verificarCadastro();" ng-if="!vm.habilitarLogin">
           <div class="form-group black">
             <label for="exampleInputCnpj">CNPJ</label>
             <input type="text" class="form-control" ng-model="vm.cnpj" id="exampleInputCnpj" required placeholder="Digite seu CNPJ">
